@@ -4,6 +4,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // get all products
+//--Stable - Tested
 router.get('/', (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
@@ -11,13 +12,10 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Category
-
-        // attributes: ['id', 'category_name'],
       },
-      // {
-      //   model: Tag, through: ProductTag, as: 'product_tags'
-      // },
-
+      {
+        model: Tag, through: ProductTag, as: 'product_Tag'
+      },
     ]
   }).then((productData) => {
     res.json(productData)
@@ -25,6 +23,7 @@ router.get('/', (req, res) => {
 });
 
 // get one product
+//----Stable - Tested
 router.get('/:id', (req, res) => {
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
@@ -33,8 +32,11 @@ router.get('/:id', (req, res) => {
       include: [
         {
           model: Category,
-          //attributes: ['id', 'product_name', 'price', 'stock'],
-        }
+        },
+        //as associated value needs to match what is listed in the models index file.
+        {
+          model: Tag, through: ProductTag, as: 'product_Tag'
+        },
       ]
     }).then((productData) => {
       res.json(productData);

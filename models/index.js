@@ -13,7 +13,7 @@ Product.belongsTo(Category, {
 // Categories have many Products - Activity 23 
 Category.hasMany(Product, {
   //foreignKey is referencing the model on the right side of 'hasMany'
-  foreignKay: 'category_id',
+  foreignKey: 'category_id',
   onDelete: 'CASCADE',
 });
 
